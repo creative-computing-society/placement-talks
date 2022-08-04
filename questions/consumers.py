@@ -1,67 +1,166 @@
-from channels.consumer import AsyncConsumer, SyncConsumer, StopConsumer
+from channels.consumer import AsyncConsumer, StopConsumer
 from channels.db import database_sync_to_async
 import json
 from .models import Question
 
 class PublicQuestionsConsumer(AsyncConsumer):
     async def websocket_connect(self, event):
-        print("websocket connected...")
         await self.send({
             'type': 'websocket.accept'
         })
     
     async def websocket_receive(self, event):
-        # print(event)
         data = json.loads(event['text'])
-        # print(data)
-        question = Question(text=data['text'])
+        if 'text' not in data:
+            await self.send({
+                'type': 'websocket.close',
+            })
+            return
+        question = Question(text=data['text'], channelName=self.channel_name)
         question = await database_sync_to_async(question.save)()
-        print(question)
         await self.send({
             'type': 'websocket.send',
-            'text': json.dumps({'id': question.id, 'text': question.text})
+            'text': json.dumps({
+                'type': 'question',
+                'id': question.id,
+                'text': question.text
+            })
         })
+        await self.channel_layer.group_send(
+            "moderator",
+            {
+                'type': 'moderator.send',
+                'operation': 'question',
+                'id': question.id,
+                'text': question.text,
+            }
+        )
     
     async def websocket_disconnect(self, event):
-        print(event, "public websocket disconnected...")
         raise StopConsumer()
+    
+    async def status_send(self, event):
+        await self.send({
+            'type': 'websocket.send',
+            'text': json.dumps({
+                'type': 'status',
+                'id': event['id'],
+                'isAccepted': event['isAccepted']
+            })
+        })
 
 class ModeratorQuestionsConsumer(AsyncConsumer):
     async def websocket_connect(self, event):
-        print("moderator websocket connected...")
+        await self.channel_layer.group_add("moderator", self.channel_name)
         await self.send({
             'type': 'websocket.accept',
         })
     
     async def websocket_receive(self, event):
-        # print(event)
         data = json.loads(event['text'])
-        print(data)
-        await self.send({
-            'type': 'websocket.send',
-            'text': json.dumps({'message': 'hello from moderator consumer'})
-        })
+        if 'id' not in data or 'isAccepted' not in data:
+            await self.send({
+                'type': 'websocket.close',
+            })
+            return
+        question = await database_sync_to_async(Question.objects.filter(id=data['id']).first)()
+        if question!=None and question.isAccepted!=data['isAccepted']:
+            if question.isAccepted:
+                question.isAccepted = False
+                question = await database_sync_to_async(question.save)()
+                await self.channel_layer.group_send(
+                    "display",
+                    {
+                        'type': 'display.send',
+                        'operation': 'remove',
+                        'id': question.id,
+                    }
+                )
+            else:
+                question.isAccepted = data['isAccepted']
+                question = await database_sync_to_async(question.save)()
+                if data['isAccepted']:
+                    await self.channel_layer.group_send(
+                        "display",
+                        {
+                            'type': 'display.send',
+                            'operation': 'question',
+                            'id': question.id,
+                            'text': question.text,
+                        }
+                    )
+            await self.channel_layer.group_send(
+                "moderator",
+                {
+                    'type': 'moderator.send',
+                    'operation': 'status',
+                    'id': question.id,
+                    'isAccepted': data['isAccepted'],
+                }
+            )
+            await self.channel_layer.send(
+                question.channelName,
+                {
+                    'type': 'status.send',
+                    'id': question.id,
+                    'isAccepted': question.isAccepted,
+                }
+            )
     
     async def websocket_disconnect(self, event):
-        print(event, "moderator websocket disconnected...")
+        await self.channel_layer.group_discard("moderator", self.channel_name)
         raise StopConsumer()
+    
+    async def moderator_send(self, event):
+        if event['operation']=='question':
+            await self.send({
+                'type': 'websocket.send',
+                'text': json.dumps({
+                    'type': 'question',
+                    'id': event['id'],
+                    'text': event['text'],
+                })
+            })
+        else:
+            await self.send({
+                'type': 'websocket.send',
+                'text': json.dumps({
+                    'type': 'status',
+                    'id': event['id'],
+                    'isAccepted': event['isAccepted'],
+                })
+            })
 
-class DisplayQuestionsConsumer(SyncConsumer):
-    def websocket_connect(self, event):
-        print(event, "Output websocket connected...")
-        self.send({
+
+class DisplayQuestionsConsumer(AsyncConsumer):
+    async def websocket_connect(self, event):
+        await self.channel_layer.group_add("display", self.channel_name)
+        await self.send({
             'type': 'websocket.accept',
         })
     
-    def websocket_receive(self, event):
-        # print(event)
-        data = json.loads(event['text'])
-        print(data)
-        self.send({
-            'type': 'websocket.send',
-            'text': json.dumps({'message': 'hello from display consumer'})
-        })
+    async def websocket_receive(self, event):
+        super()
     
-    def websocket_disconnect(self, event):
-        print(event, "output websocket disconnected...")
+    async def websocket_disconnect(self, event):
+        await self.channel_layer.group_discard("display", self.channel_name)
         raise StopConsumer()
+    
+    async def display_send(self, event):
+        if event['operation']=='question':
+            await self.send({
+                'type': 'websocket.send',
+                'text': json.dumps({
+                    'type': 'question',
+                    'id': event['id'],
+                    'text': event['text'],
+                })
+            })
+        else:
+            await self.send({
+                'type': 'websocket.send',
+                'text': json.dumps({
+                    'type': 'remove',
+                    'id': event['id'],
+                })
+            })
