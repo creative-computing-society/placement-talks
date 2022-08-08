@@ -4,6 +4,7 @@ from django.db import models
 
 class Question(models.Model):
     text = models.TextField()
+    questioner = models.CharField(max_length=50)
     isAccepted = models.BooleanField(null=True, blank=True, default=None)
     channelName = models.CharField(max_length=255, blank=True)
 

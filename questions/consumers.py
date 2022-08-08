@@ -1,6 +1,8 @@
 from channels.consumer import AsyncConsumer, StopConsumer
 from channels.db import database_sync_to_async
 import json
+
+from channels.utils import asyncio
 from .models import Question
 
 class PublicQuestionsConsumer(AsyncConsumer):
@@ -11,12 +13,12 @@ class PublicQuestionsConsumer(AsyncConsumer):
     
     async def websocket_receive(self, event):
         data = json.loads(event['text'])
-        if 'text' not in data:
+        if 'text' not in data or 'questioner' not in data:
             await self.send({
                 'type': 'websocket.close',
             })
             return
-        question = Question(text=data['text'], channelName=self.channel_name)
+        question = Question(questioner=data['questioner'], text=data['text'], channelName=self.channel_name)
         question = await database_sync_to_async(question.save)()
         await self.send({
             'type': 'websocket.send',
@@ -32,9 +34,11 @@ class PublicQuestionsConsumer(AsyncConsumer):
                 'type': 'moderator.send',
                 'operation': 'question',
                 'id': question.id,
+                'questioner': question.questioner,
                 'text': question.text,
             }
         )
+        # await asyncio.sleep(20)
     
     async def websocket_disconnect(self, event):
         raise StopConsumer()
@@ -86,6 +90,7 @@ class ModeratorQuestionsConsumer(AsyncConsumer):
                             'type': 'display.send',
                             'operation': 'question',
                             'id': question.id,
+                            'questioner': question.questioner,
                             'text': question.text,
                         }
                     )
@@ -118,6 +123,7 @@ class ModeratorQuestionsConsumer(AsyncConsumer):
                 'text': json.dumps({
                     'type': 'question',
                     'id': event['id'],
+                    'questioner': event['questioner'],
                     'text': event['text'],
                 })
             })
@@ -153,6 +159,7 @@ class DisplayQuestionsConsumer(AsyncConsumer):
                 'text': json.dumps({
                     'type': 'question',
                     'id': event['id'],
+                    'questioner': event['questioner'],
                     'text': event['text'],
                 })
             })
