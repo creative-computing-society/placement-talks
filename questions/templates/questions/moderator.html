@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="{% static 'questions/css/moderator.css' %}" />
+    <script defer src="{% static 'questions/js/moderator.js' %}"></script>
+
+    <title>moderator</title>
+  </head>
+  <body>
+    <section id="only">
+      <ul id="questions-list" class="list">
+        <li id="sample-entry" class="question-box hidden">
+          <p class="question"></p>
+          <div class="button-container">
+            <img onclick="accept(this.parentElement.parentElement.id);" class="logo accept" src="{% static 'questions/img/check-mark.png' %}" />
+            <img onclick="reject(this.parentElement.parentElement.id);" class="logo reject" src="{% static 'questions/img/cross.png' %}" />
+          </div>
+        </li>
+        {% for question in questions %}
+        <li id="{{question.id}}" class="question-box {% if question.isAccepted == True %}accepted{% elif question.isAccepted == False %}rejected{% endif %}">
+          <p class="question">
+            {{question.text}}
+          </p>
+          <div class="button-container">
+            <img onclick="accept(this.parentElement.parentElement.id);" class="logo accept" src="{% static 'questions/img/check-mark.png' %}" />
+            <img onclick="reject(this.parentElement.parentElement.id);" class="logo reject" src="{% static 'questions/img/cross.png' %}" />
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section id="error" class="hidden">
+      <h1>Something went wrong</h2>
+      <h2>Please reload the page!</h2>
+    </section>
+    <div id="host_name" class="hidden">{{request.get_host}}</div>
+  </body>
+</html>

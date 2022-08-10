@@ -1,0 +1,77 @@
+/*
+SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+
+FONT SIZE SYSTEM (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* font-family: "Rubik", sans-serif; */
+  color: #444;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+#only {
+  background-color: #000;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: scroll;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#only::-webkit-scrollbar {
+  display: none;
+}
+
+.list {
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.question-box {
+  background-color: #ccc;
+  border-radius: 30px;
+  padding-top: 0.75%;
+  padding-bottom: 0.75%;
+  padding-left: 2%;
+  padding-right: 2%;
+  width: 100%;
+  height: auto;
+}
+
+.question {
+  text-align: center;
+  font-size: 3rem;
+}
+
+#error {
+  background-color: #000;
+  color: #ccc;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+  font-size: large;
+  padding-top: 50px;
+}
+
+.hidden {
+  display: none !important;
+}

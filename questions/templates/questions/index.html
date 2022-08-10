@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'questions/css/style.css' %}" />
+    <script defer src="{% static 'questions/js/script.js' %}"></script>
+
+    <title>Question</title>
+  </head>
+  <body>
+    <section id="question">
+      <div class="question-box">
+        <div class="speaker-box">
+          <img
+            src="{% static 'questions/img/customer-4.jpg' %}"
+            alt="Customer Photo"
+            class="speaker"
+          />
+          <img
+            src="{% static 'questions/img/customer-3.jpg' %}"
+            alt="Customer Photo"
+            class="speaker"
+          />
+          <img
+            src="{% static 'questions/img/customer-5.jpg' %}"
+            alt="Customer Photo"
+            class="speaker"
+          />
+        </div>
+        <form onsubmit="return raiseQuestion();" class="cta-form">
+          <div>
+            <label for="full name">Full Name</label>
+            <input
+              id="questioner"
+              type="text"
+              placeholder=""
+              required
+            />
+          </div>
+          <div>
+            <label for="question">Enter Your Question</label>
+            <input
+              id="text"
+              type="text"
+              placeholder=""
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn--form">Send</button>
+        </form>
+      </div>
+      <div class="previous-question-box">
+        <ul id="user-questions-list" class="list">
+        </ul>
+      </div>
+    </section>
+    <section id="error" class="hidden">
+      <h1>Something went wrong</h2>
+      <h2>Please reload the page!</h2>
+    </section>
+    <div id="host_name" class="hidden">{{request.get_host}}</div>
+  </body>
+</html>
