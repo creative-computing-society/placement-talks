@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from .models import Question
 
 # Create your views here.
@@ -6,6 +7,7 @@ from .models import Question
 def index(request):
     return render(request, 'questions/index.html')
 
+@login_required(login_url='/admin/login')
 def moderator(request):
     questions = Question.objects.all()
     return render(request, 'questions/moderator.html', {

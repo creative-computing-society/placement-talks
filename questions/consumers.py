@@ -55,6 +55,11 @@ class PublicQuestionsConsumer(AsyncConsumer):
 
 class ModeratorQuestionsConsumer(AsyncConsumer):
     async def websocket_connect(self, event):
+        if self.scope["user"].is_anonymous:
+            await self.send({
+                'type': 'websocket.close',
+            })
+            return
         await self.channel_layer.group_add("moderator", self.channel_name)
         await self.send({
             'type': 'websocket.accept',
