@@ -17,7 +17,10 @@
     <section id="only">
       <ul id="questions-list" class="list">
         <li id="sample-entry" class="question-box hidden">
-          <p class="question"></p>
+          <p class="question">
+            <b class="questioner"></b>
+            <span>&nbsp;-&nbsp;</span>
+          </p>
           <div class="button-container">
             <img onclick="accept(this.parentElement.parentElement.id);" class="logo accept" src="{% static 'questions/img/check-mark.png' %}" />
             <img onclick="reject(this.parentElement.parentElement.id);" class="logo reject" src="{% static 'questions/img/cross.png' %}" />
@@ -26,6 +29,8 @@
         {% for question in questions %}
         <li id="{{question.id}}" class="question-box {% if question.isAccepted == True %}accepted{% elif question.isAccepted == False %}rejected{% endif %}">
           <p class="question">
+            <b class="questioner">{{question.questioner}}</b>
+            <span>&nbsp;-&nbsp;</span>
             {{question.text}}
           </p>
           <div class="button-container">

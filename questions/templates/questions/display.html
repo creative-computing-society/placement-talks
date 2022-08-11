@@ -18,11 +18,16 @@
     <section id="only">
       <ul id="questions-list" class="list">
         <li id="sample-entry" class="question-box hidden">
-          <p class="question"></p>
+          <p class="question">
+            <b class="questioner"></b>
+            <span>&nbsp;-&nbsp;</span>
+          </p>
         </li>
         {% for question in questions %}
         <li id="{{question.id}}" class="question-box {% if question.isAccepted == True %}accepted{% elif question.isAccepted == False %}rejected{% endif %}">
           <p class="question">
+            <b class="questioner">{{question.questioner}}</b>
+            <span>&nbsp;-&nbsp;</span>
             {{question.text}}
           </p>
         </li>
