@@ -14,6 +14,6 @@ def moderator(request):
 
 def display(request):
     questions = Question.objects.filter(isAccepted=True).all()
-    return render(request, 'questions/display.html', {
+    return render(request, 'questions/display_new.html', {
         'questions': questions,
     })

@@ -8,23 +8,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="{% static 'questions/css/display.css' %}" />
-    <script defer src="{% static 'questions/js/display.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'questions/css/display_new.css' %}" />
+    <script defer src="{% static 'questions/js/display_new.js' %}"></script>
 
-    <title>display</title>
+    <title>Questions</title>
   </head>
 
   <body>
     <section id="only">
       <ul id="questions-list" class="list">
-        <li id="sample-entry" class="question-box hidden">
+        <li tabindex=0 id="sample-entry" class="question-box hidden" style="--clr: #0ed095">
           <p class="question">
             <b class="questioner"></b>
             <span>&nbsp;-&nbsp;</span>
           </p>
         </li>
         {% for question in questions %}
-        <li id="{{question.id}}" class="question-box">
+        <li tabindex=0 id="{{question.id}}" class="question-box" style="--clr: #0ed095">
           <p class="question">
             <b class="questioner">{{question.questioner}}</b>
             <span>&nbsp;-&nbsp;</span>
