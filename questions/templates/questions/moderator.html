@@ -24,6 +24,7 @@
           <div class="button-container">
             <img onclick="accept(this.parentElement.parentElement.id);" class="logo accept" src="{% static 'questions/img/check-mark.png' %}" />
             <img onclick="reject(this.parentElement.parentElement.id);" class="logo reject" src="{% static 'questions/img/cross.png' %}" />
+            <div class="loading hidden"></div>
           </div>
         </li>
         {% for question in questions %}
@@ -36,6 +37,7 @@
           <div class="button-container">
             <img onclick="accept(this.parentElement.parentElement.id);" class="logo accept" src="{% static 'questions/img/check-mark.png' %}" />
             <img onclick="reject(this.parentElement.parentElement.id);" class="logo reject" src="{% static 'questions/img/cross.png' %}" />
+            <div class="loading hidden"></div>
           </div>
         </li>
         {% endfor %}

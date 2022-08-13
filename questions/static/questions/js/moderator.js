@@ -34,6 +34,13 @@ ws.onmessage = function(event) {
             node.classList.remove("accepted");
             node.classList.add("rejected");
         }
+        let buttonContainer = node.getElementsByClassName("button-container")[0];
+        let imgs = buttonContainer.getElementsByTagName("img");
+        let loader = buttonContainer.getElementsByClassName("loading")[0];
+        for(let i=0; i<imgs.length; i++) {
+            imgs[i].classList.remove("hidden");
+        }
+        loader.classList.add("hidden");
     }
 }
 
@@ -54,7 +61,13 @@ function accept(id) {
         id: Number(id),
         isAccepted: true,
     };
-    console.log(data);
+    let buttonContainer = document.getElementById(id).getElementsByClassName("button-container")[0];
+    let imgs = buttonContainer.getElementsByTagName("img");
+    let loader = buttonContainer.getElementsByClassName("loading")[0];
+    for(let i=0; i<imgs.length; i++) {
+        imgs[i].classList.add("hidden");
+    }
+    loader.classList.remove("hidden");
     ws.send(JSON.stringify(data));
 }
 
@@ -63,5 +76,12 @@ function reject(id) {
         id: Number(id),
         isAccepted: false,
     };
+    let buttonContainer = document.getElementById(id).getElementsByClassName("button-container")[0];
+    let imgs = buttonContainer.getElementsByTagName("img");
+    let loader = buttonContainer.getElementsByClassName("loading")[0];
+    for(let i=0; i<imgs.length; i++) {
+        imgs[i].classList.add("hidden");
+    }
+    loader.classList.remove("hidden");
     ws.send(JSON.stringify(data));
 }

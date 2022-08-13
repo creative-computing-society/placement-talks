@@ -116,6 +116,15 @@ class ModeratorQuestionsConsumer(AsyncConsumer):
                     'isAccepted': question.isAccepted,
                 }
             )
+        elif question.isAccepted==data['isAccepted']:
+            await self.send({
+                'type': 'websocket.send',
+                'text': json.dumps({
+                    'type': 'status',
+                    'id': data['id'],
+                    'isAccepted': data['isAccepted']
+                })
+            })
     
     async def websocket_disconnect(self, event):
         await self.channel_layer.group_discard("moderator", self.channel_name)

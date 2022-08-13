@@ -2,6 +2,8 @@ const host_name = document.getElementById("host_name");
 const list = document.getElementById("user-questions-list");
 const bodyView = document.getElementById("question");
 const errorView = document.getElementById("error");
+const submitButton = document.getElementById("submit-button");
+const loader = document.getElementById("loader");
 
 const ws = new WebSocket('ws://'+host_name.innerText+'/ws/public')
 
@@ -19,6 +21,8 @@ ws.onmessage = function(event) {
         node.id = data.id;
         node.classList.add("previous-question")
         list.appendChild(node);
+        submitButton.classList.remove("hidden");
+        loader.classList.add("hidden");
     }
     else {
         let node = document.getElementById(data.id);
@@ -52,6 +56,8 @@ function raiseQuestion() {
         questioner: questioner.value,
         text: text.value,
     };
+    submitButton.classList.add("hidden");
+    loader.classList.remove("hidden");
     ws.send(JSON.stringify(data));
     text.value = "";
     return false;
