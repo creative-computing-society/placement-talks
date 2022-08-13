@@ -44,3 +44,6 @@ env
 #database folder
 database
 db.sqlite3
+
+#whitenoise static files directory
+staticfiles
