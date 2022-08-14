@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['placementtalks.ccstiet.com', 'localhost']
 
 
 # Application definition
@@ -83,7 +83,7 @@ ASGI_APPLICATION = 'config.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'database/db.sqlite3',
     }
 }
 
@@ -136,10 +136,10 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("localhost", 6379)],
+            "hosts": [("redis", 6379)],
         },
     },
 }
 
 #csrf tokens origins
-CSRF_TRUSTED_ORIGINS = ['https://*.ccstiet.com', 'https://*.127.0.0.1', 'http://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://*.ccstiet.com', 'https://*.127.0.0.1', 'http://*.127.0.0.1', 'http://*.ccstiet.com']
