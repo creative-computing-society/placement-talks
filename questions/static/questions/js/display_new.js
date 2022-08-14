@@ -1,4 +1,3 @@
-const host_name = document.getElementById("host_name");
 const list = document.getElementById("questions-list");
 const bodyView = document.getElementById("only");
 const errorView = document.getElementById("error");

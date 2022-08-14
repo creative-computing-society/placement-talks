@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['placementtalks.ccstiet.com', 'localhost']
+ALLOWED_HOSTS = ['placementtalks.ccstiet.com']
 
 
 # Application definition
@@ -142,4 +142,4 @@ CHANNEL_LAYERS = {
 }
 
 #csrf tokens origins
-CSRF_TRUSTED_ORIGINS = ['https://*.ccstiet.com', 'https://*.127.0.0.1', 'http://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://placementtalks.ccstiet.com']
