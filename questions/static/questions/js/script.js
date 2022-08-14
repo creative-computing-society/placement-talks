@@ -5,7 +5,7 @@ const errorView = document.getElementById("error");
 const submitButton = document.getElementById("submit-button");
 const loader = document.getElementById("loader");
 
-const ws = new WebSocket('ws://'+host_name.innerText+'/ws/public')
+const ws = new WebSocket('ws://placementtalks.ccstiet.com/ws/public')
 
 ws.onopen = function() {
     console.log("websocket connection open...");

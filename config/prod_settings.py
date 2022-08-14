@@ -2,7 +2,7 @@ from .settings import *
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['placementtalks.ccstiet.com']
+ALLOWED_HOSTS = ['placementtalks.ccstiet.com', 'localhost']
 
 DATABASES = {
     'default': {
