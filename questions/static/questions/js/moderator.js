@@ -3,7 +3,7 @@ const list = document.getElementById("questions-list");
 const bodyView = document.getElementById("only");
 const errorView = document.getElementById("error");
 
-const ws = new WebSocket('ws://'+host_name.innerText+'/ws/moderator')
+const ws = new WebSocket('wss://placementtalks.ccstiet.com/ws/moderator')
 
 ws.onopen = function() {
     console.log("websocket connection open...");

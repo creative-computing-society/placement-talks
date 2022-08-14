@@ -142,4 +142,4 @@ CHANNEL_LAYERS = {
 }
 
 #csrf tokens origins
-CSRF_TRUSTED_ORIGINS = ['https://*.ccstiet.com', 'https://*.127.0.0.1', 'http://*.127.0.0.1', 'http://*.ccstiet.com']
+CSRF_TRUSTED_ORIGINS = ['https://*.ccstiet.com', 'https://*.127.0.0.1', 'http://*.127.0.0.1']
