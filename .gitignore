@@ -47,3 +47,7 @@ db.sqlite3
 
 #whitenoise static files directory
 staticfiles
+
+#ssl certificates
+privkey.pem
+cert.pem
