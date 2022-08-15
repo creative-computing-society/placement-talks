@@ -54,7 +54,7 @@ html {
   padding-right: 4rem;
   padding-bottom: 1rem;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   gap: 3rem;
 }
 
@@ -63,7 +63,13 @@ html {
   font-size: 2rem;
   margin-top: auto;
   margin-bottom: auto;
-  width: 90%;
+  /* width: 90%; */
+}
+
+.name {
+  color: #fff;
+  font-size: 2rem;
+  text-align: left;
 }
 
 .button-container {
@@ -81,6 +87,8 @@ html {
 .logo:hover {
   transform: scale(1.1);
 }
+
+/* UTILITY CLASSES */
 
 .rejected {
   background-color: rgb(138, 4, 4);
@@ -107,6 +115,11 @@ html {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.question-container {
+  width: 90%;
+  word-wrap: break-word;
 }
 
 #error {

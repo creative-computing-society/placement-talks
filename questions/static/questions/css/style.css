@@ -215,6 +215,32 @@ body::-webkit-scrollbar {
   }
 }
 
+.cta-form input::placeholder {
+  color: rgba(17, 17, 17, 0.606);
+}
+
+.cta-form input,
+.cta-form select {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.8rem;
+  font-family: inherit;
+  /* color: inherit; */
+  color: #111;
+  border: none;
+  background-color: #dff6ff;
+  border-radius: 9px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+html {
+  /* font-family: "Rubik", sans-serif; */
+  color: #444;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  font-family: "Asul", sans-serif;
+}
+
 #error {
   background-color: #000;
   color: #ccc;

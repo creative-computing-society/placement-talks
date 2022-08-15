@@ -7,7 +7,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Creative Computing Society is back again with an interactive and enriching QnA session 'Placement Talks' with three members from its Executive Board of 2020 who, with their hardwork and perseverance have made their places in tech giants like Google, Amazon, Bloomberg and Microsoft with international packages over 1 crore.">
 
+    <link rel="icon" href="{% static 'questions/img/CCSLOGO.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,27 +17,34 @@
       rel="stylesheet"
     />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Asul&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="{% static 'questions/css/style.css' %}" />
     <script defer src="{% static 'questions/js/script.js' %}"></script>
 
-    <title>Question</title>
+    <title>Placement Talks</title>
   </head>
   <body>
     <section id="question">
       <div class="question-box">
         <div class="speaker-box">
           <img
-            src="{% static 'questions/img/customer-4.jpg' %}"
+            src="{% static 'questions/img/utkarsh_chauhan.jpeg' %}"
             alt="Customer Photo"
             class="speaker"
           />
           <img
-            src="{% static 'questions/img/customer-3.jpg' %}"
+            src="{% static 'questions/img/pallavi_garg.jpeg' %}"
             alt="Customer Photo"
             class="speaker"
           />
           <img
-            src="{% static 'questions/img/customer-5.jpg' %}"
+            src="{% static 'questions/img/lira_chawla.jpeg' %}"
             alt="Customer Photo"
             class="speaker"
           />
@@ -47,6 +56,7 @@
               id="questioner"
               type="text"
               placeholder=""
+              maxlength="25"
               required
             />
           </div>
@@ -56,6 +66,7 @@
               id="text"
               type="text"
               placeholder=""
+              maxlength="250"
               required
             />
           </div>

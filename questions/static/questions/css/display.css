@@ -96,6 +96,21 @@ html {
   margin-left: 20px;
   text-align: center;
   font-size: 3rem;
+  word-wrap: break-word;
+}
+
+html {
+  /* font-family: "Rubik", sans-serif; */
+  color: #ddd;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  font-family: "Asul", sans-serif;
+}
+
+.name {
+  font-size: 2.5rem;
+  margin-left: 20px;
+  word-wrap: break-word;
 }
 
 #error {

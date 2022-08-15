@@ -7,20 +7,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Creative Computing Society is back again with an interactive and enriching QnA session 'Placement Talks' with three members from its Executive Board of 2020 who, with their hardwork and perseverance have made their places in tech giants like Google, Amazon, Bloomberg and Microsoft with international packages over 1 crore.">
 
+    <link rel="icon" href="{% static 'questions/img/CCSLOGO.png' %}">
     <link rel="stylesheet" href="{% static 'questions/css/moderator.css' %}" />
     <script defer src="{% static 'questions/js/moderator.js' %}"></script>
 
-    <title>moderator</title>
+    <title>Moderator | Placement Talks</title>
   </head>
   <body>
     <section id="only">
       <ul id="questions-list" class="list">
         <li id="sample-entry" class="question-box hidden">
-          <p class="question">
-            <b class="questioner"></b>
-            <span>&nbsp;-&nbsp;</span>
-          </p>
+          <div class="question-container">
+            <p class="question"></p>
+            <br /><br />
+            <p class="name"></p>
+          </div>
           <div class="button-container">
             <img onclick="accept(this.parentElement.parentElement.id);" class="logo accept" src="{% static 'questions/img/check-mark.png' %}" />
             <img onclick="reject(this.parentElement.parentElement.id);" class="logo reject" src="{% static 'questions/img/cross.png' %}" />
@@ -29,11 +32,13 @@
         </li>
         {% for question in questions %}
         <li id="{{question.id}}" class="question-box {% if question.isAccepted == True %}accepted{% elif question.isAccepted == False %}rejected{% endif %}">
-          <p class="question">
-            <b class="questioner">{{question.questioner}}</b>
-            <span>&nbsp;-&nbsp;</span>
-            {{question.text}}
-          </p>
+          <div class="question-container">
+            <p class="question">
+              {{question.text}}
+            </p>
+            <br /><br />
+            <p class="name">~{{question.questioner}}</p>
+          </div>
           <div class="button-container">
             <img onclick="accept(this.parentElement.parentElement.id);" class="logo accept" src="{% static 'questions/img/check-mark.png' %}" />
             <img onclick="reject(this.parentElement.parentElement.id);" class="logo reject" src="{% static 'questions/img/cross.png' %}" />

@@ -2,6 +2,21 @@ const list = document.getElementById("questions-list");
 const bodyView = document.getElementById("only");
 const errorView = document.getElementById("error");
 
+class bgColour {
+    static idx = -1;
+    static color = ["#a3623a", "#0ed095", "#fc5f9b"];
+    static getColor() {
+        return this.color[this.idx=(++this.idx)%this.color.length];
+    }
+}
+
+const assignColor = function() {
+    let entries = document.getElementsByClassName("question-box");
+    for(let i=0; i<entries.length; i++) {
+        entries[i].style.setProperty('--clr', bgColour.getColor());
+    }
+}
+
 const ws = new WebSocket('wss://placementtalks.ccstiet.com/ws/display')
 
 ws.onopen = function() {
@@ -15,11 +30,11 @@ ws.onmessage = function(event) {
         let node = document.getElementById("sample-entry");
         let clone = node.cloneNode(true);
         let textP = clone.getElementsByClassName("question")[0];
-        let questionerB = textP.getElementsByClassName("questioner")[0];
-        questionerB.innerText = data.questioner;
-        let textNode = document.createTextNode(data.text);
-        textP.appendChild(textNode);
+        let questionerP = clone.getElementsByClassName("name")[0];
+        questionerP.innerText = "~"+data.questioner;
+        textP.innerText = data.text;
         clone.id = data.id;
+        clone.style.setProperty('--clr', bgColour.getColor());
         clone.classList.remove("hidden");
         list.appendChild(clone);
     }

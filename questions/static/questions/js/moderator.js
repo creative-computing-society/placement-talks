@@ -15,10 +15,9 @@ ws.onmessage = function(event) {
         let node = document.getElementById("sample-entry");
         let clone = node.cloneNode(true);
         let textP = clone.getElementsByClassName("question")[0];
-        let questionerB = textP.getElementsByClassName("questioner")[0];
-        questionerB.innerText = data.questioner;
-        let textNode = document.createTextNode(data.text);
-        textP.appendChild(textNode);
+        let questionerP = clone.getElementsByClassName("name")[0];
+        questionerP.innerText = "~"+data.questioner;
+        textP.innerText = data.text;
         clone.id = data.id;
         clone.classList.remove("hidden");
         list.appendChild(clone);
