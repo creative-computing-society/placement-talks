@@ -171,6 +171,7 @@ body::-webkit-scrollbar {
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
+  word-wrap: break-word;
 }
 
 .accepted {
