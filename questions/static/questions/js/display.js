@@ -17,7 +17,7 @@ const assignColor = function() {
     }
 }
 
-const ws = new WebSocket('wss://placementtalks.ccstiet.com/ws/display')
+const ws = new WebSocket('ws://127.0.0.1:8000/ws/display')
 
 ws.onopen = function() {
     console.log("websocket connection open...");
