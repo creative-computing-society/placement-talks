@@ -18,6 +18,8 @@ class PublicQuestionsConsumer(AsyncConsumer):
                 'type': 'websocket.close',
             })
             return
+        if data['questioner']=='':
+            data['questioner'] = 'Anonymous'
         question = Question(questioner=data['questioner'], text=data['text'], channelName=self.channel_name)
         question = await database_sync_to_async(question.save)()
         await self.send({

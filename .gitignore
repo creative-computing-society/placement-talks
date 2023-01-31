@@ -49,4 +49,4 @@ db.sqlite3
 privkey.pem
 cert.pem
 
-prod
+logs
