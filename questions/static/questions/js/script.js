@@ -5,7 +5,7 @@ const submitButton = document.getElementById("submit-button");
 const loader = document.getElementById("loader");
 const host = document.getElementById("host");
 
-const ws = new WebSocket('ws://'+host.innerText+'/ws/public')
+const ws = new WebSocket('wss://'+host.innerText+'/ws/public')
 
 ws.onopen = function() {
     // console.log("websocket connection open...");

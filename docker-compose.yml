@@ -17,4 +17,5 @@ services:
     volumes:
       - ./database/:/app/database/
       - ./static/:/app/static/
+      - ./logs/:/app/logs/
     restart: always

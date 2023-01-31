@@ -18,7 +18,7 @@ const assignColor = function() {
     }
 }
 
-const ws = new WebSocket('ws://'+host.innerText+'/ws/display')
+const ws = new WebSocket('wss://'+host.innerText+'/ws/display')
 
 ws.onopen = function() {
     // console.log("websocket connection open...");

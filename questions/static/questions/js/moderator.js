@@ -3,7 +3,7 @@ const bodyView = document.getElementById("only");
 const errorView = document.getElementById("error");
 const host = document.getElementById("host");
 
-const ws = new WebSocket('ws://'+host.innerText+'/ws/moderator')
+const ws = new WebSocket('wss://'+host.innerText+'/ws/moderator')
 
 ws.onopen = function() {
     // console.log("websocket connection open...");
