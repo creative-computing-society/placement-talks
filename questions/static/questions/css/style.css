@@ -69,31 +69,16 @@ body::-webkit-scrollbar {
   margin-bottom: 40px;
   padding-left: 10%;
   padding-right: 10%;
+  align-items: center;
   /* position: absolute; */
   /* left: 50%; */
   /* transform: translate(-50%, -50%); */
 }
 
-.speaker {
-  /* border: 3px solid rgb(38, 135, 125); */
-  /* border: 3px solid #47b5ff; */
-  /* width: 60px; */
-  height: 60px;
-  /* border-radius: 50%; */
-  /* transition-duration: 350ms;
-  transition-timing-function: ease-out; */
-}
-
-/* .speaker:hover {
-  transform: translateY(-50%);
-  width: 130px;
-  height: 130px;
-} */
-
 .cta-form {
   width: 80%;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -383,15 +368,31 @@ html {
   }
 }
 
+/* .gdsc-logo {
+  height: 48px;
+} */
+
+.logo {
+  height: 50px;
+}
+/* 
+.ccs-logo {
+  height: 50px;
+} */
+
+/* .girlup-logo {
+  height: 55px;
+} */
+
 @media (max-width: 600px) {
-  .speaker {
-    height: 50px;
+  .logo {
+    height: 40px;
   }
 }
 
 @media (max-width: 400px) {
-  .speaker {
-    height: 45px;
+  .logo {
+    height: 35px;
   }
   .question-box form .button {
     margin-top: 30px;
@@ -399,8 +400,14 @@ html {
 }
 
 @media (max-width: 350px) {
-  .speaker {
-    height: 40px;
+  .logo {
+    height: 30px;
   }
 }
 
+.heading {
+  font-family: inherit;
+  color: #39b9bc;
+  font-size: 3.5em;
+  margin: 10%;
+}
