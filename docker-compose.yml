@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  doubts:
+    image: ccs/placement-talks
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "5376:5376"
+    depends_on: 
+      - redis
+    volumes:
+      - ./database/:/app/database/
+      - ./static/:/app/static/
+    restart: always

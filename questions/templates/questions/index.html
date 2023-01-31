@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CCS stands as one of the oldest and the most prestigious tech societies on campus, forging stepping stones for you into the world of tech and creating a healthy community of like-minded, ambitious enthusiasts.">
+
+    <link rel="icon" href="{% static 'questions/img/CCSLOGO.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Asul&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="{% static 'questions/css/style.css' %}" />
+    <script defer src="{% static 'questions/js/script.js' %}"></script>
+
+    <title>Creative Computing Society</title>
+  </head>
+  <body>
+    <section id="question">
+      <div class="question-box">
+        <div class="speaker-box">
+          <img
+            src="{% static 'questions/img/ccs_logo.png' %}"
+            alt="Logo"
+            class="speaker"
+          />
+          <img
+            src="{% static 'questions/img/helix-logo.png' %}"
+            alt="Logo"
+            class="speaker"
+          />
+        </div>
+        <form onsubmit="return raiseQuestion();" class="cta-form">
+          <div>
+            <label for="full name">Full Name</label>
+            <input
+              id="questioner"
+              type="text"
+              placeholder=""
+              maxlength="25"
+            />
+          </div>
+          <div>
+            <label for="question">Enter Your Question</label>
+            <input
+              id="text"
+              type="text"
+              placeholder=""
+              maxlength="250"
+              required
+            />
+          </div>
+          {% comment %} <button id="submit-button" type="submit" class="btn btn--form">Send</button> {% endcomment %}
+          <div type="submit" class="submit-container">
+            <button id="submit-button" type="submit" title="" class="button">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              SEND
+            </button>
+          </div>
+          <div id="loader" class="loading hidden"></div>
+        </form>
+      </div>
+      <div class="previous-question-box">
+        <ul id="user-questions-list" class="list">
+        </ul>
+      </div>
+    </section>
+    <section id="error" class="hidden">
+      <h1>Something went wrong</h2>
+      <h2>Please reload the page!</h2>
+    </section>
+    <span class="hidden" id="host">{{request.get_host}}</span>
+  </body>
+</html>

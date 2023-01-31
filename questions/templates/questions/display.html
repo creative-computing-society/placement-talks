@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="CCS stands as one of the oldest and the most prestigious tech societies on campus, forging stepping stones for you into the world of tech and creating a healthy community of like-minded, ambitious enthusiasts.">
+
+    <link rel="icon" href="{% static 'questions/img/CCSLOGO.png' %}">
+    <link rel="stylesheet" href="{% static 'questions/css/display.css' %}" />
+    <script defer src="{% static 'questions/js/display.js' %}"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Asul&display=swap"
+      rel="stylesheet"
+    />
+    
+    <title>Doubts | Creative Computing Society</title>
+  </head>
+
+  <body onload="assignColor();">
+    <section id="only">
+      <ul id="questions-list" class="list">
+        <li tabindex=0 id="sample-entry" class="question-box hidden" style="--clr: #0ed095">
+          <p class="question"></p>
+          <br />
+          <br />
+          <p class="name"></p>
+        </li>
+        {% for question in questions %}
+        <li tabindex=0 id="{{question.id}}" class="question-box" style="--clr: #0ed095">
+          <p class="question">
+            {{question.text}}
+          </p>
+          <br />
+          <br />
+          <p class="name">~{{question.questioner}}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <section id="error" class="hidden">
+      <h1>Something went wrong</h2>
+      <h2>Please reload the page!</h2>
+    </section>
+    <span class="hidden" id="host">{{request.get_host}}</span>
+  </body>
+</html>
