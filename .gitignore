@@ -40,6 +40,8 @@ __pycache__
 
 #virtual environment
 venv
+env
+staticfiles
 
 #database folder
 database
